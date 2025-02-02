@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know More About the Stream</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .stream-info {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    .stream-info h2 {
+      margin-bottom: 10px;
+    }
+    .stream-info p {
+      margin-bottom: 10px;
+    }
+    .more-info {
+      margin-top: 20px;
+    }
+    .more-info h3 {
+      margin-bottom: 10px;
+    }
+    .more-info .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .more-info .buttons button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .more-info .buttons button:hover {
+      background: #0056b3;
+    }
+    .details {
+      margin-top: 20px;
+      display: none;
+    }
+    .details.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="stream-info">
+    <h2>Know More About the Stream</h2>
+    <p id="stream-description"></p>
+    <h3>What is it really?</h3>
+    <p id="stream-details"></p>
+    <div class="more-info">
+      <h3>Get More Information</h3>
+      <div class="buttons">
+        <button onclick="showDetails('entrance-exams')">Entrance Exams</button>
+        <button onclick="showDetails('job-opportunities')">Job Opportunities</button>
+      </div>
+      <div id="entrance-exams" class="details">
+        <h4>Entrance Exams</h4>
+        <p id="entrance-exams-info"></p>
+      </div>
+      <div id="job-opportunities" class="details">
+        <h4>Job Opportunities</h4>
+        <p id="job-opportunities-info"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const streamDetails = {
+      BioScience: {
+        description: "BioScience focuses on the study of living organisms, including biology, biotechnology, and healthcare.",
+        details: "It involves research, experiments, and applications in medicine, genetics, and environmental science.",
+        entranceExams: "NEET, AIIMS, JIPMER, and other medical entrance exams.",
+        jobOpportunities: "Doctor, Biotechnologist, Geneticist, Microbiologist, and more."
+      },
+      ComputerScience: {
+        description: "Computer Science involves the study of computers, programming, algorithms, and software development.",
+        details: "It includes areas like artificial intelligence, data science, cybersecurity, and software engineering.",
+        entranceExams: "JEE Main, JEE Advanced, BITSAT, and other engineering entrance exams.",
+        jobOpportunities: "Software Developer, Data Scientist, Cybersecurity Analyst, AI Engineer, and more."
+      },
+      Commerce: {
+        description: "Commerce focuses on business, economics, finance, and trade.",
+        details: "It includes accounting, marketing, management, and financial planning.",
+        entranceExams: "CA Foundation, CAT, CLAT, and other commerce-related exams.",
+        jobOpportunities: "Chartered Accountant, Financial Analyst, Marketing Manager, Business Consultant, and more."
+      },
+      Humanities: {
+        description: "Humanities involve the study of human culture, history, literature, and social sciences.",
+        details: "It includes subjects like philosophy, sociology, psychology, and political science.",
+        entranceExams: "UPSC, CLAT, and other humanities-related exams.",
+        jobOpportunities: "Historian, Psychologist, Sociologist, Writer, and more."
+      }
+    };
+
+    // Get the selected stream from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedStream = urlParams.get('stream');
+
+    // Display the stream details
+    if (selectedStream && streamDetails[selectedStream]) {
+      document.getElementById('stream-description').textContent = streamDetails[selectedStream].description;
+      document.getElementById('stream-details').textContent = streamDetails[selectedStream].details;
+      document.getElementById('entrance-exams-info').textContent = streamDetails[selectedStream].entranceExams;
+      document.getElementById('job-opportunities-info').textContent = streamDetails[selectedStream].jobOpportunities;
+    } else {
+      document.getElementById('stream-description').textContent = "No stream selected.";
+    }
+
+    function showDetails(type) {
+      const entranceExams = document.getElementById('entrance-exams');
+      const jobOpportunities = document.getElementById('job-opportunities');
+      if (type === 'entrance-exams') {
+        entranceExams.classList.add('active');
+        jobOpportunities.classList.remove('active');
+      } else if (type === 'job-opportunities') {
+        jobOpportunities.classList.add('active');
+        entranceExams.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>
