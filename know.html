@@ -24,12 +24,20 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       max-width: 600px;
       width: 100%;
+      text-align: center;
     }
     .stream-info h2 {
       margin-bottom: 10px;
     }
     .stream-info p {
       margin-bottom: 10px;
+    }
+    .stream-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
     .more-info {
       margin-top: 20px;
@@ -40,6 +48,7 @@
     .more-info .buttons {
       display: flex;
       gap: 10px;
+      justify-content: center;
     }
     .more-info .buttons button {
       padding: 10px 20px;
@@ -64,6 +73,9 @@
 <body>
   <div class="stream-info">
     <h2>Know More About the Stream</h2>
+    <!-- Stream Image -->
+    <img id="stream-image" class="stream-image" alt="Stream Image">
+    <!-- Stream Description -->
     <p id="stream-description"></p>
     <h3>What is it really?</h3>
     <p id="stream-details"></p>
@@ -83,32 +95,35 @@
       </div>
     </div>
   </div>
-
   <script>
     const streamDetails = {
       BioScience: {
         description: "BioScience focuses on the study of living organisms, including biology, biotechnology, and healthcare.",
         details: "It involves research, experiments, and applications in medicine, genetics, and environmental science.",
         entranceExams: "NEET, AIIMS, JIPMER, and other medical entrance exams.",
-        jobOpportunities: "Doctor, Biotechnologist, Geneticist, Microbiologist, and more."
+        jobOpportunities: "Doctor, Biotechnologist, Geneticist, Microbiologist, and more.",
+        image: "images/bioscience.jpg"
       },
       ComputerScience: {
         description: "Computer Science involves the study of computers, programming, algorithms, and software development.",
         details: "It includes areas like artificial intelligence, data science, cybersecurity, and software engineering.",
         entranceExams: "JEE Main, JEE Advanced, BITSAT, and other engineering entrance exams.",
-        jobOpportunities: "Software Developer, Data Scientist, Cybersecurity Analyst, AI Engineer, and more."
+        jobOpportunities: "Software Developer, Data Scientist, Cybersecurity Analyst, AI Engineer, and more.",
+        image: "images/computerscience.jpg"
       },
       Commerce: {
         description: "Commerce focuses on business, economics, finance, and trade.",
         details: "It includes accounting, marketing, management, and financial planning.",
         entranceExams: "CA Foundation, CAT, CLAT, and other commerce-related exams.",
-        jobOpportunities: "Chartered Accountant, Financial Analyst, Marketing Manager, Business Consultant, and more."
+        jobOpportunities: "Chartered Accountant, Financial Analyst, Marketing Manager, Business Consultant, and more.",
+        image: "images/commerce.jpg"
       },
       Humanities: {
         description: "Humanities involve the study of human culture, history, literature, and social sciences.",
         details: "It includes subjects like philosophy, sociology, psychology, and political science.",
         entranceExams: "UPSC, CLAT, and other humanities-related exams.",
-        jobOpportunities: "Historian, Psychologist, Sociologist, Writer, and more."
+        jobOpportunities: "Historian, Psychologist, Sociologist, Writer, and more.",
+        image: "images/humanities.jpg"
       }
     };
 
@@ -122,6 +137,11 @@
       document.getElementById('stream-details').textContent = streamDetails[selectedStream].details;
       document.getElementById('entrance-exams-info').textContent = streamDetails[selectedStream].entranceExams;
       document.getElementById('job-opportunities-info').textContent = streamDetails[selectedStream].jobOpportunities;
+
+      // Set the stream image
+      const streamImage = document.getElementById('stream-image');
+      streamImage.src = streamDetails[selectedStream].image;
+      streamImage.alt = `${selectedStream} Image`;
     } else {
       document.getElementById('stream-description').textContent = "No stream selected.";
     }
